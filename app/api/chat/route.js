@@ -31,12 +31,12 @@ export async function POST(req) {
         }));
 
         const MODELS = [
-            "google/gemini-2.0-flash-experimental:free", // Primary
+            "openrouter/free", // Primary: Auto-selects best available free model
+            "google/gemma-3-27b:free",
             "meta-llama/llama-3.3-70b-instruct:free",
+            "mistralai/mistral-small-3.1-24b-instruct:free",
             "deepseek/deepseek-r1:free",
-            "qwen/qwen-2.5-coder-32b-instruct:free",
-            "mistralai/mistral-7b-instruct:free",
-            "google/gemini-2.0-flash-exp:free" // Backup
+            "qwen/qwen-2.5-coder-32b-instruct:free"
         ];
 
         let reply = "";
