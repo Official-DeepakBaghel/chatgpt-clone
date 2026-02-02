@@ -3,16 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
-import { useState, useActionState, useEffect } from "react";
+import { useState, useActionState, useEffect, Suspense } from "react";
 import { PasswordForm } from "./passwordform";
 import { useSearchParams } from "next/navigation";
 
-export default function Password() {
+function PasswordContent() {
     const [state, action] = useActionState(PasswordForm, { error: null });
     const searchParams = useSearchParams();
     const emailFromQuery = searchParams.get("email") || "";
     const [email, setEmail] = useState(emailFromQuery);
-    
+
     const [showPassword, setShowPassword] = useState(false);
     useEffect(() => {
         if (emailFromQuery) {
@@ -103,5 +103,13 @@ export default function Password() {
                 </footer>
             </main>
         </div>
+    );
+}
+
+export default function Password() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <PasswordContent />
+        </Suspense>
     );
 }

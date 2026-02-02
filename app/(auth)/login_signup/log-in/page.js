@@ -2,11 +2,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function Password() {
+function LoginContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [error, setError] = useState(null);
@@ -139,5 +139,13 @@ export default function Password() {
                 </footer>
             </main>
         </div>
+    );
+}
+
+export default function Password() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <LoginContent />
+        </Suspense>
     );
 }
